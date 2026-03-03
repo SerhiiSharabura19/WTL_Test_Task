@@ -1,10 +1,10 @@
-import { test } from '../../tests/_fixtures/fixturesPageInstances';
+import { test } from '../../tests/_fixtures/fixtures';
 import { generateUser } from '../../src/helpers/genegateUser';
 import { VALID_NAMES, VALID_EMAILS } from '../../src/helpers/userCredentialsDataset';
 
 let user;
 
-test.beforeEach(async ({page}) => {
+test.beforeEach(async () => {
   user = generateUser();
 })
 

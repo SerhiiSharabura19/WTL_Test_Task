@@ -1,4 +1,4 @@
-import { test } from '../_fixtures/fixturesPageInstances';
+import { test } from '../../tests/_fixtures/fixtures';
 import { products } from '../../src/helpers/productAttributes' 
 
 test('TC-12: Add Products in Cart', async({
@@ -11,7 +11,7 @@ test('TC-12: Add Products in Cart', async({
     await productsPage.hoverOverProduct(products.product1.serialNumber);
     await productsPage.addFirstProductToCart();
     await productsPage.clickContinueShoppingBtn();
-    await productsPage.hoverOverProduct(products.product1.serialNumber);
+    await productsPage.hoverOverProduct(products.product2.serialNumber);
     await productsPage.addSecondProductToCart();
     await productsPage.clickviewCartLink();
     await cartPage.assertFirstProduct();

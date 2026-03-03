@@ -14,7 +14,7 @@ readonly womenCategory: Locator;
 readonly menCategory: Locator;
 readonly kidsCategory: Locator;
 readonly womenTopsSubCategory: Locator;
-readonly womenTopsPageTitle: Locator;
+readonly pageTitle: Locator;
 readonly jeansSubCategory: Locator;
 
   constructor(page: Page) {
@@ -30,7 +30,7 @@ readonly jeansSubCategory: Locator;
     this.kidsCategory = page.locator('[href="#Kids"]');
     this.womenTopsSubCategory = page.locator(`[href="/category_products/${categories.women.tops}"]`);
     this.jeansSubCategory = page.locator(`[href="/category_products/${categories.men.jeans}"]`)
-    this.womenTopsPageTitle = page.locator('.title.text-center');
+    this.pageTitle = page.locator('.title.text-center');
   }
  
 async open() {
@@ -117,16 +117,16 @@ async assertCategoryURL(categoryNumber: string) {
   });
 }
 
-async assertWomenTopsPageHasCorrectTitle(title: string) {
-  await test.step(`Verify the Women/Tops subcategory page has correct title`, async() => {
-    await expect(this.womenTopsPageTitle).toHaveText(title);
+async assertPageHasCorrectTitle(title: string) {
+  await test.step(`Verify the page has correct title`, async() => {
+    await expect(this.pageTitle).toHaveText(title);
   });
 }
 
-async assertJeansPageHasCorrectTitle(title: string) {
-  await test.step(`Verify the Jeans subcategory page has correct title`, async() => {
-    await expect(this.jeansSubCategory).toHaveText(title);
-  });
-}
+// async assertJeansPageHasCorrectTitle(title: string) {
+//   await test.step(`Verify the Jeans subcategory page has correct title`, async() => {
+//     await expect(this.jeansSubCategory).toHaveText(title);
+//   });
+// }
 
 }
