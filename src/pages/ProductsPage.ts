@@ -28,7 +28,7 @@ async open() {
 
 async hoverOverProduct(number: number) {
   await test.step(`Hover over the ${number} product`, async () => {
-    await this.page.route(/(doubleclick|googlesyndication|googleads)/, route =>
+   /* await this.page.route(/(doubleclick|googlesyndication|googleads)/, route =>
     route.abort());
     await this.page.addInitScript(() => {
       const style = document.createElement('style');
@@ -42,7 +42,7 @@ async hoverOverProduct(number: number) {
         }
       `;
       document.documentElement.appendChild(style);
-    });
+    });*/
     
     await this.product.nth(number).hover();
   });

@@ -12,5 +12,10 @@ export default defineConfig({
     baseURL: 'https://automationexercise.com',
     testIdAttribute: 'data-qa',
     headless: true,
+    launchOptions: {
+      args: [
+        '--disable-features=InterestFeedContentSuggestions',
+      ],
+    },
   },
 });
