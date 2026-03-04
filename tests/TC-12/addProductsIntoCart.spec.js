@@ -2,7 +2,7 @@ import { test } from '../../tests/_fixtures/fixtures';
 import { products } from '../../src/helpers/productAttributes' 
 
 test('TC-12: Add Products in Cart by logged out user', async({
-  killAds: _killAds,
+  //killAds: _killAds,
   homePage,
   productsPage,
   cartPage }) => {
@@ -32,7 +32,7 @@ test('TC-12: Add Products in Cart by logged out user', async({
 
 test('TC-12: Add Products in Cart by logged in user', async({
   user: _user,
-  killAds: _killAds,
+  //killAds: _killAds,
   homePage,
   productsPage,
   cartPage }) => {
