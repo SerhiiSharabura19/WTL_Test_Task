@@ -8,7 +8,7 @@ test.beforeEach(async () => {
   user = generateUser();
 })
 
-test.skip('Successful Sign up of a user', async ({
+test('Successful Sign up of a user', async ({
   homePage, 
   signUpLoginPage, 
   accountInformationPage,

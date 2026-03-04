@@ -2,7 +2,7 @@ import { test } from '../../tests/_fixtures/fixtures';
 import { WOMEN_TOPS_PAGE_TITLE, JEANS_PAGE_TITLE } from '../../src/helpers/constants';
 import { categories } from '../../src/helpers/categories';
 
-test.skip('TC-18: Add Products in Cart', async({ homePage }) => {
+test('TC-18: Add Products in Cart', async({ homePage }) => {
     await homePage.open();
     await homePage.assertWomenCategoryIsVisible();
     await homePage.assertMenCategoryIsVisible();

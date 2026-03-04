@@ -1,105 +1,50 @@
 name: Playwright Tests
 
 on:
-  workflow_dispatch:
-    inputs:
-      test_file:
-        description: 'Select which test to run (TC-1, TC-12, TC-18, API)'
-        required: true
-        default: 'all'
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
 
 jobs:
-  setup:
+  test:
+    name: Run ${{ matrix.name }}
     runs-on: ubuntu-latest
-    outputs:
-      node_modules_path: ${{ steps.cache.outputs.cache-hit }}
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: TC-1
+            spec: tests/TC-1/signUp.spec.js
+          - name: TC-12
+            spec: tests/TC-12/addProductsIntoCart.spec.js
+          - name: TC-18
+            spec: tests/TC-18/viewCategoryProducts.spec.js
+          - name: API
+            spec: tests/API-1,2,4,9/API-1,2,4,9.spec.js
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Cache Node modules
-        id: cache
-        uses: actions/cache@v3
+      - name: Cache node modules
+        uses: actions/cache@v4
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
 
-      - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-
-      - name: Upload node_modules and Playwright
-        uses: actions/upload-artifact@v4
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
         with:
-          name: dependencies
-          path: |
-            node_modules
-            playwright/.local-browsers
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
 
-  TC-1:
-    needs: setup
-    if: ${{ github.event.inputs.test_file == 'TC-1' || github.event.inputs.test_file == 'all' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+      - run: npm ci
 
-      - name: Download dependencies
-        uses: actions/download-artifact@v4
-        with:
-          name: dependencies
-          path: ./ 
+      - run: npx playwright install --with-deps
 
-      - run: npx playwright test tests/TC-1/signUp.spec.js
-
-  TC-12:
-    needs: setup
-    if: ${{ github.event.inputs.test_file == 'TC-12' || github.event.inputs.test_file == 'all' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Download dependencies
-        uses: actions/download-artifact@v4
-        with:
-          name: dependencies
-          path: ./ 
-
-      - run: npx playwright test tests/TC-12/addProductsIntoCart.spec.js
-
-  TC-18:
-    needs: setup
-    if: ${{ github.event.inputs.test_file == 'TC-18' || github.event.inputs.test_file == 'all' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Download dependencies
-        uses: actions/download-artifact@v4
-        with:
-          name: dependencies
-          path: ./ 
-
-      - run: npx playwright test tests/TC-18/viewCategoryProducts.spec.js
-
-  API:
-    needs: setup
-    if: ${{ github.event.inputs.test_file == 'API' || github.event.inputs.test_file == 'all' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Download dependencies
-        uses: actions/download-artifact@v4
-        with:
-          name: dependencies
-          path: ./ 
-
-      - run: npx playwright test tests/API-1,2,4,9/API-1,2,4,9.spec.js
+      - run: npx playwright test ${{ matrix.spec }}
