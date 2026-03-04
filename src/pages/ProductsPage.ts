@@ -9,6 +9,7 @@ export class ProductsPage {
   readonly secondProductAddToCartBtn: Locator;
   readonly continueShoppingBtn: Locator;
   readonly viewCartLink: Locator;
+  readonly adCloseBtn: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -18,6 +19,7 @@ export class ProductsPage {
     this.secondProductAddToCartBtn = page.locator('[data-product-id="2"]').nth(1);
     this.continueShoppingBtn = page.locator('.btn.btn-success.close-modal.btn-block');
     this.viewCartLink = page.locator('[href="/view_cart"]').filter({ hasText: 'View Cart' });
+    this.adCloseBtn = page.getByRole('button', {name: 'Close'})
   }
 
 async open() {
@@ -30,20 +32,7 @@ async hoverOverProduct(number: number) {
   await test.step(`Hover over the ${number} product`, async () => {
     await this.page.route(/(doubleclick|googlesyndication|googleads)/, route =>
     route.abort());
-    /*await this.page.addInitScript(() => {
-      const style = document.createElement('style');
-      style.innerHTML = `
-        ins.adsbygoogle,
-        iframe[id^="aswift_"],
-        iframe[title="Advertisement"],
-        [aria-label="Advertisement"] {
-          pointer-events: none !important;
-          opacity: 0 !important;
-        }
-      `;
-      document.documentElement.appendChild(style);
-    });*/
-    
+    await this.adCloseBtn.click();
     await this.product.nth(number).hover();
   });
 }
