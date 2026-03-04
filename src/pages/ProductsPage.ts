@@ -33,7 +33,11 @@ async hoverOverProduct(number: number) {
   await test.step(`Hover over the ${number} product`, async () => {
     await this.page.route(/(doubleclick|googlesyndication|googleads)/, route =>
     route.abort());
-    await this.adCloseBtn.click();
+    // scroll page down 200px
+    await page.evaluate(() => {
+      window.scrollBy(0, 200);
+    });
+    //await this.adCloseBtn.click();
     await this.product.nth(number).hover();
   });
 }
