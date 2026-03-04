@@ -33,9 +33,15 @@ async hoverOverProduct(number: number) {
     await this.page.addInitScript(() => {
       const style = document.createElement('style');
       style.innerHTML = `
-        #card { display: none !important; }
-        iframe[title="Advertisement"] { display: none !important; }`;
-      document.head.appendChild(style);
+        ins.adsbygoogle,
+        iframe[id^="aswift_"],
+        iframe[title="Advertisement"],
+        [aria-label="Advertisement"] {
+          pointer-events: none !important;
+          opacity: 0 !important;
+        }
+      `;
+      document.documentElement.appendChild(style);
     });
     
     await this.product.nth(number).hover();
