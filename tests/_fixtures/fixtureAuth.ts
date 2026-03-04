@@ -6,8 +6,7 @@ export const test = base.extend<{ user }>({
     homePage,
     signUpLoginPage,
     accountInformationPage,
-    accountCreatedPage,
-    productsPage
+    accountCreatedPage
   }, use) => {
 
     const user = generateUser();
@@ -28,7 +27,6 @@ export const test = base.extend<{ user }>({
     await accountInformationPage.enterMobileNumber(user.mobileNumber);
     await accountInformationPage.clickCreateAccount();
     await accountCreatedPage.clickContinueBtn();
-    await productsPage.closeAd();
 
     await use(user);
   },

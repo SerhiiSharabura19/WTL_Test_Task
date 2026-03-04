@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import type { Page, Locator } from '@playwright/test';
 
 export class ProductsPage {
@@ -26,6 +26,12 @@ export class ProductsPage {
 async open() {
   await test.step(`Open the Products page`, async () => {
     await this.page.goto(this.url);
+  });
+}
+
+async assertAdIsVisible() {
+  await test.step(`Verify that an ad modal is visible`, async () => {
+    await expect(this.adCloseBtn).toBeVisible();
   });
 }
 
