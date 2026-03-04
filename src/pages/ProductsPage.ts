@@ -35,7 +35,7 @@ async hoverOverProduct(number: number) {
     route.abort());
     // scroll page down 200px
     await this.page.evaluate(() => {
-      window.scrollBy(0, 200);
+      window.scrollBy(0, 600);
     });
     //await this.adCloseBtn.click();
     await this.product.nth(number).hover();
