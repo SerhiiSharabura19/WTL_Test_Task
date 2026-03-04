@@ -32,6 +32,7 @@ test('TC-12: Add Products in Cart by logged out user', async({
 
 test('TC-12: Add Products in Cart by logged in user', async({
   user: _user,
+  killAds: _killAds,
   homePage,
   productsPage,
   cartPage }) => {
