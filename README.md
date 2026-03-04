@@ -27,5 +27,5 @@ Logged in user fixture and test with it usage - 1h
 
 Creatimg remote repository and pushing the project - 0.5h
 
-
+CI - 40min
 
