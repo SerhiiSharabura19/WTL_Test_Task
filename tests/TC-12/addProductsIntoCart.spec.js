@@ -32,16 +32,16 @@ test('TC-12: Add Products in Cart by logged out user', async({
 
 test('TC-12: Add Products in Cart by logged in user', async({
   user: _user,
-  //killAds: _killAds,
+  killAds: _killAds,
   homePage,
   productsPage,
   cartPage }) => {
     await homePage.open();
     await homePage.assertCarouselIsVisible();
     await homePage.clickProductsLink();
-    if(await productsPage.isAdVisible()) {
-      await productsPage.closeAd();
-    };
+    // if(await productsPage.isAdVisible()) {
+    //   await productsPage.closeAd();
+    // };
     await productsPage.hoverOverProduct(products.product1.serialNumber);
     await productsPage.addFirstProductToCart();
     await productsPage.clickContinueShoppingBtn();
