@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 import type { Page, Locator } from '@playwright/test';
+import { BasePage } from './BasePage';
 
-export class SignUpLoginPage {
+export class SignUpLoginPage extends BasePage {
 
-  readonly page: Page;
   readonly url: string;
   readonly signUpFormTitle: Locator;
   readonly loginFormTitle: Locator;
@@ -13,7 +13,7 @@ export class SignUpLoginPage {
   readonly accountInformationTitle: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super (page);
     this.url = '/login';
     this.signUpFormTitle = page.locator('.signup-form h2');
     this.loginFormTitle = page.locator('.login-form h2');

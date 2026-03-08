@@ -1,22 +1,31 @@
 import { test, expect, APIResponse, APIRequestContext } from '@playwright/test';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export class APIMethods {
   readonly request: APIRequestContext;
+  readonly productsListEndpoint: string;
+  readonly brandsListEndpoint: string;
+  readonly verifyLoginEndpoint: string;
 
   constructor(request: APIRequestContext) {
     this.request = request;
+    this.productsListEndpoint = process.env.PRODUCTS_LIST_ENDPOINT!;
+    this.brandsListEndpoint = process.env.BRANDS_LIST_ENDPOINT!;
+    this.verifyLoginEndpoint = process.env.VERIFY_LOGIN_ENDPOINT!;
   }
 
   async getAllProducts() {
     const response = await this.request.get(
-      'https://automationexercise.com/api/productsList',
+      this.productsListEndpoint
     );
+
     return response;
   }
 
   async postToAllProductsList() {
     const response = await this.request.post(
-      'https://automationexercise.com/api/productsList'
+      this.productsListEndpoint
     );
 
     return response;
@@ -24,7 +33,7 @@ export class APIMethods {
 
   async putToAllBrandsList() {
     const response = await this.request.put(
-      'https://automationexercise.com/api/brandsList'
+      this.brandsListEndpoint
     );
 
     return response;
@@ -32,7 +41,7 @@ export class APIMethods {
 
   async deleteToVerifyLogin() {
     const response = await this.request.delete(
-      'https://automationexercise.com/api/verifyLogin'
+      this.verifyLoginEndpoint
     );
 
     return response;

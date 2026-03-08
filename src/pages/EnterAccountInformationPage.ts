@@ -1,9 +1,9 @@
 import {test, expect} from '@playwright/test';
 import type { Page, Locator } from '@playwright/test';
+import { BasePage } from './BasePage';
 
-export class AccountInformationPage {
+export class AccountInformationPage extends BasePage {
 
-  readonly page: Page;
   readonly title: Locator;
   readonly mrRadioBtn: Locator;
   readonly nameField: Locator;
@@ -27,7 +27,7 @@ export class AccountInformationPage {
   readonly createAccountBtn: Locator;
 
 constructor(page: Page) {
-  this.page = page;
+  super (page);
   this.title = page.locator('.title.text-center').nth(1);
   this.mrRadioBtn = page.locator('#id_gender1');
   this.nameField = page.getByTestId('name');

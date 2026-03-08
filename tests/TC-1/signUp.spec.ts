@@ -1,8 +1,8 @@
-import { test } from '../../tests/_fixtures/fixtures';
-import { generateUser } from '../../src/helpers/genegateUser';
-import { VALID_NAMES, VALID_EMAILS } from '../../src/helpers/userCredentialsDataset';
+import { test } from '../_fixtures/fixtures';
+import { generateUser, User } from '../../utils/genegateUser';
+import { VALID_NAMES, VALID_EMAILS } from '../../utils/userCredentialsDataset';
 
-let user;
+let user: User;
 
 test.beforeEach(async () => {
   user = generateUser();

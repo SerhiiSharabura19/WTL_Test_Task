@@ -1,10 +1,11 @@
 import {test, expect} from '@playwright/test';
 import type { Page, Locator } from '@playwright/test';
-import { categories } from '../helpers/categories';
+import { categories } from '../../tests/TC-18/categories';
+import { BasePage } from './BasePage';
 
-export class HomePage {
-readonly page: Page;
-readonly url: string;
+
+export class HomePage extends BasePage{
+
 readonly loginLink: Locator;
 readonly logoutLink: Locator;
 readonly deleteAccountLink: Locator;
@@ -18,8 +19,7 @@ readonly pageTitle: Locator;
 readonly jeansSubCategory: Locator;
 
   constructor(page: Page) {
-    this.page = page;
-    this.url = '/';
+    super(page);
     this.loginLink = page.locator('[href="/login"]');
     this.logoutLink = page.locator('[href="/logout"]');
     this.deleteAccountLink = page.locator('[href="/delete account"]');

@@ -1,6 +1,6 @@
-import { test } from '../../tests/_fixtures/fixtures';
-import { WOMEN_TOPS_PAGE_TITLE, JEANS_PAGE_TITLE } from '../../src/helpers/constants';
-import { categories } from '../../src/helpers/categories';
+import { test } from '../_fixtures/fixtures';
+import { WOMEN_TOPS_PAGE_TITLE, JEANS_PAGE_TITLE } from './constants';
+import { categories } from './categories';
 
 test('TC-18: Add Products in Cart', async({ homePage }) => {
     await homePage.open();

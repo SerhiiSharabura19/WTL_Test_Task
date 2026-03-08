@@ -1,5 +1,5 @@
-import { test } from '../../tests/_fixtures/fixtures';
-import { products } from '../../src/helpers/productAttributes' 
+import { test } from '../_fixtures/fixtures';
+import { products } from './productAttributes' 
 
 test('TC-12: Add Products in Cart by logged out user', async({
   homePage,

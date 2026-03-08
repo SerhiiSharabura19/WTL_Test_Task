@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 import type { Page, Locator } from '@playwright/test';
+import { BasePage } from './BasePage';
 
-export class ProductsPage {
-  readonly page: Page;
+export class ProductsPage extends BasePage {
   readonly url: string;
   readonly product: Locator;
   readonly firstProductAddToCartBtn: Locator;
@@ -12,7 +12,7 @@ export class ProductsPage {
   readonly adCloseBtn: Locator;
 
   constructor(page: Page) {
-    this.page = page;
+    super (page);
     this.url = '/products';
     this.product = page.locator('.single-products');
     this.firstProductAddToCartBtn = page.locator('[data-product-id="1"]').nth(1);
