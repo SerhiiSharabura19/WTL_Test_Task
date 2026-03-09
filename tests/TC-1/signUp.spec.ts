@@ -6,13 +6,13 @@ let user: User;
 
 test.beforeEach(async () => {
   user = generateUser();
-})
+});
 
 test('Successful Sign up of a user', async ({
-  homePage, 
-  signUpLoginPage, 
+  homePage,
+  signUpLoginPage,
   accountInformationPage,
-  accountCreatedPage
+  accountCreatedPage,
 }) => {
   await homePage.open();
   await homePage.clickSignUpLogin();
@@ -38,16 +38,15 @@ test('Successful Sign up of a user', async ({
   await accountInformationPage.clickCreateAccount();
   await accountCreatedPage.assertTitleIsVisible();
   await accountCreatedPage.clickContinueBtn();
-  
+
   await homePage.assertLogoutLinkIsVisible();
 });
 
 test.describe('Verify signup validation', () => {
   validUserData.forEach(({ userName, email, description }) => {
-    test(` of the email with ${description}`, async({signUpLoginPage}) => {
+    test(` of the email with ${description}`, async ({ signUpLoginPage }) => {
       await signUpLoginPage.open();
       await signUpLoginPage.verifyCredentials(userName, email);
     });
   });
 });
-
