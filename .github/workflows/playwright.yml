@@ -21,13 +21,13 @@ jobs:
       matrix:
         include:
           - name: TC-1
-            spec: tests/TC-1/signUp.spec.js
+            spec: tests/TC-1/signUp.spec.ts
           - name: TC-12
-            spec: tests/TC-12/addProductsIntoCart.spec.js
+            spec: tests/TC-12/addProductsIntoCart.spec.ts
           - name: TC-18
-            spec: tests/TC-18/viewCategoryProducts.spec.js
+            spec: tests/TC-18/viewCategoryProducts.spec.ts
           - name: API
-            spec: tests/API-1,2,4,9/API-1,2,4,9.spec.js
+            spec: tests/API/API.spec.ts
 
     steps:
       - uses: actions/checkout@v4
