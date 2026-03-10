@@ -11,6 +11,11 @@ jobs:
     name: Run ${{ matrix.name }}
     runs-on: ubuntu-latest
 
+    env:
+      PRODUCTS_LIST_ENDPOINT: ${{ secrets.PRODUCTS_LIST_ENDPOINT }}
+      BRANDS_LIST_ENDPOINT: ${{ secrets.BRANDS_LIST_ENDPOINT }}
+      VERIFY_LOGIN_ENDPOINT: ${{ secrets.VERIFY_LOGIN_ENDPOINT }}
+
     strategy:
       fail-fast: false
       matrix:
