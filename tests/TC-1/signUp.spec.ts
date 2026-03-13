@@ -13,6 +13,7 @@ test('Successful Sign up of a user', async ({
   signUpLoginPage,
   accountInformationPage,
   accountCreatedPage,
+  killAds: _killAds,
 }) => {
   await homePage.open();
   await homePage.clickSignUpLogin();
