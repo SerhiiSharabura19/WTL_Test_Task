@@ -15,16 +15,15 @@ export class AccountCreatedPage extends BasePage {
   }
 
   async assertTitleIsVisible() {
-    await test.step(`Verify that "ACCOUNT CREATED!" title is visible`, async() => {
-      await expect(this.title).toBeVisible({timeout: 7000});
+    await test.step(`Verify that "ACCOUNT CREATED!" title is visible`, async () => {
+      await expect(this.title).toBeVisible({ timeout: 7000 });
     });
     return this;
   }
 
-async clickContinueBtn() {
-    await test.step(`Click [Continue] button`, async() => {
+  async clickContinueBtn() {
+    await test.step(`Click [Continue] button`, async () => {
       await this.continueBtn.click();
     });
   }
-
 }
