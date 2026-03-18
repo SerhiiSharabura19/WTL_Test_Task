@@ -1,9 +1,8 @@
 import { test, expect } from '@playwright/test';
 import type { Page, Locator } from '@playwright/test';
-import { BasePage } from './BasePage';
+import { BasePage } from '../base/BasePage';
 
 export class SignUpLoginPage extends BasePage {
-
   readonly url: string;
   readonly signUpFormTitle: Locator;
   readonly loginFormTitle: Locator;
@@ -13,7 +12,7 @@ export class SignUpLoginPage extends BasePage {
   readonly accountInformationTitle: Locator;
 
   constructor(page: Page) {
-    super (page);
+    super(page);
     this.url = '/login';
     this.signUpFormTitle = page.locator('.signup-form h2');
     this.loginFormTitle = page.locator('.login-form h2');
@@ -24,10 +23,10 @@ export class SignUpLoginPage extends BasePage {
   }
 
   async open() {
-  await test.step(`Open the SignUp/Login page`, async () => {
-    await this.page.goto(this.url);
-  });
-}
+    await test.step(`Open the SignUp/Login page`, async () => {
+      await this.page.goto(this.url);
+    });
+  }
 
   async assertLogInFormTitle() {
     await test.step('Assert Log In form title is visible', async () => {

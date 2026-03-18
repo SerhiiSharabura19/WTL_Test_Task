@@ -10,9 +10,9 @@ export class APIMethods {
 
   constructor(request: APIRequestContext) {
     this.request = request;
-    this.productsListEndpoint = process.env.PRODUCTS_LIST_ENDPOINT;
-    this.brandsListEndpoint = process.env.BRANDS_LIST_ENDPOINT;
-    this.verifyLoginEndpoint = process.env.VERIFY_LOGIN_ENDPOINT;
+    this.productsListEndpoint = process.env.PRODUCTS_LIST_ENDPOINT || 'null';
+    this.brandsListEndpoint = process.env.BRANDS_LIST_ENDPOINT || 'null';
+    this.verifyLoginEndpoint = process.env.VERIFY_LOGIN_ENDPOINT || 'null';
   }
 
   async getAllProducts() {
@@ -42,6 +42,7 @@ export class APIMethods {
   async assertResponseHas200Code(response: APIResponse) {
     await test.step(`Verify that the responce has 200 code`, async () => {
       expect(response.status()).toBe(200);
+      return this;
     });
   }
 
@@ -49,6 +50,7 @@ export class APIMethods {
     await test.step(`Verify that the responce has 405 code`, async () => {
       const body = await response.json();
       expect(body.responseCode).toBe(405);
+      return this;
     });
   }
 

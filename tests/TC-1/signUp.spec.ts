@@ -1,5 +1,5 @@
 import { generateUser, User } from '../../utils/genegateUser';
-import { validUserData } from '../../utils/userCredentialsDataset';
+import { validUserData } from '../data/userCredentialsDataset';
 import { test } from '../_fixtures/fixtures';
 
 let user: User;

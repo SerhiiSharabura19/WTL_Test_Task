@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import type { Page, Locator } from '@playwright/test';
-import { BasePage } from './BasePage';
+import { BasePage } from '../base/BasePage';
 
 export class ProductsPage extends BasePage {
   readonly url: string;
@@ -12,7 +12,7 @@ export class ProductsPage extends BasePage {
   readonly adCloseBtn: Locator;
 
   constructor(page: Page) {
-    super (page);
+    super(page);
     this.url = '/products';
     this.product = page.locator('.single-products');
     this.firstProductAddToCartBtn = page.locator('[data-product-id="1"]').nth(1);
@@ -22,48 +22,46 @@ export class ProductsPage extends BasePage {
     this.adCloseBtn = page.locator('[aria-label="Close ad"]');
   }
 
-async open() {
-  await test.step(`Open the Products page`, async () => {
-    await this.page.goto(this.url);
-  });
-}
+  async open() {
+    await test.step(`Open the Products page`, async () => {
+      await this.page.goto(this.url);
+    });
+  }
 
-async assertAdIsVisible() {
-  await test.step(`Verify that an ad modal is visible`, async () => {
-    await expect(this.adCloseBtn).toBeVisible();
-  });
-}
+  async assertAdIsVisible() {
+    await test.step(`Verify that an ad modal is visible`, async () => {
+      await expect(this.adCloseBtn).toBeVisible();
+    });
+  }
 
-async hoverOverProduct(number: number) {
-  await test.step(`Hover over the ${number} product`, async () => {
-    await this.page.route(/(doubleclick|googlesyndication|googleads)/, route =>
-    route.abort());
-    await this.product.nth(number).hover();
-  });
-}
+  async hoverOverProduct(number: number) {
+    await test.step(`Hover over the ${number} product`, async () => {
+      await this.page.route(/(doubleclick|googlesyndication|googleads)/, (route) => route.abort());
+      await this.product.nth(number).hover();
+    });
+  }
 
-async addFirstProductToCart() {
-  await test.step(`Add the first product to cart`, async () => {
-    await this.firstProductAddToCartBtn.click();
-  });
-}
+  async addFirstProductToCart() {
+    await test.step(`Add the first product to cart`, async () => {
+      await this.firstProductAddToCartBtn.click();
+    });
+  }
 
-async addSecondProductToCart() {
-  await test.step(`Add the second product to cart`, async () => {
-    await this.secondProductAddToCartBtn.click();
-  });
-}
+  async addSecondProductToCart() {
+    await test.step(`Add the second product to cart`, async () => {
+      await this.secondProductAddToCartBtn.click();
+    });
+  }
 
-async clickContinueShoppingBtn() {
-  await test.step(`Click [Continue Shopping] button`, async () => {
-    await this.continueShoppingBtn.click();
-  });
-}
+  async clickContinueShoppingBtn() {
+    await test.step(`Click [Continue Shopping] button`, async () => {
+      await this.continueShoppingBtn.click();
+    });
+  }
 
-async clickviewCartLink() {
-  await test.step(`Click "View Cart" link`, async () => {
-    await this.viewCartLink.click();
-  });
-}
-
+  async clickviewCartLink() {
+    await test.step(`Click "View Cart" link`, async () => {
+      await this.viewCartLink.click();
+    });
+  }
 }

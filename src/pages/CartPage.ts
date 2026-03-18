@@ -1,6 +1,6 @@
-import {test, expect} from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import type { Page, Locator } from '@playwright/test';
-import { BasePage } from './BasePage';
+import { BasePage } from '../base/BasePage';
 
 export class CartPage extends BasePage {
   readonly url: string;
@@ -11,7 +11,7 @@ export class CartPage extends BasePage {
   readonly cartTotal: Locator;
 
   constructor(page: Page) {
-    super (page);
+    super(page);
     this.url = '/view_cart';
     this.firstProduct = page.locator('#product-1');
     this.secondProduct = page.locator('#product-2');
@@ -21,39 +21,38 @@ export class CartPage extends BasePage {
   }
 
   async open() {
-  await test.step(`Open the Cart page`, async () => {
-    await this.page.goto(this.url);
+    await test.step(`Open the Cart page`, async () => {
+      await this.page.goto(this.url);
     });
   }
 
   async assertFirstProduct() {
     await test.step(`Verify that the first product is added to cart`, async () => {
-    await expect(this.firstProduct).toBeVisible();
+      await expect(this.firstProduct).toBeVisible();
     });
   }
 
   async assertSecondProduct() {
     await test.step(`Verify that the second product is added to cart`, async () => {
-    await expect(this.secondProduct).toBeVisible();
+      await expect(this.secondProduct).toBeVisible();
     });
   }
 
   async assertPriceOfProduct(serialNumber: number, price: string) {
     await test.step(`Verify the ${serialNumber} product price in the cart`, async () => {
-    await expect(this.cartPrice.nth(serialNumber)).toHaveText(price);
+      await expect(this.cartPrice.nth(serialNumber)).toHaveText(price);
     });
   }
 
   async assertQuantityOfProduct(serialNumber: number, quantity: string) {
     await test.step(`Verify the ${serialNumber} product quantity in the cart`, async () => {
-    await expect(this.cartQuantity.nth(serialNumber)).toHaveText(quantity);
+      await expect(this.cartQuantity.nth(serialNumber)).toHaveText(quantity);
     });
   }
 
   async assertTotalPriceOfProduct(serialNumber: number, total: string) {
     await test.step(`Verify the ${serialNumber} product total price in the cart`, async () => {
-    await expect(this.cartTotal.nth(serialNumber)).toHaveText(total);
+      await expect(this.cartTotal.nth(serialNumber)).toHaveText(total);
     });
   }
-
 }
