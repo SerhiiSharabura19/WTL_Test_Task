@@ -36,7 +36,6 @@ export class HomePage extends BasePage {
   async open() {
     await test.step(`Open the Homepage`, async () => {
       await this.page.goto(this.url);
-      //return this;
     });
   }
 

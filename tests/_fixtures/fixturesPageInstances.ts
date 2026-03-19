@@ -6,7 +6,7 @@ import { AccountCreatedPage } from '../../src/pages/AccountCreatedPage';
 import { APIMethods } from '../../src/API/APImethods';
 import { ProductsPage } from '../../src/pages/ProductsPage';
 import { CartPage } from '../../src/pages/CartPage';
-import { PageManager } from '../../src/pages/PageManager';
+import { PageManagerV2 } from '../../src/pages/PageManagerV2';
 
 export const test = base.extend<{
   signUpLoginPage: SignUpLoginPage;
@@ -16,7 +16,7 @@ export const test = base.extend<{
   apiMethods: APIMethods;
   productsPage: ProductsPage;
   cartPage: CartPage;
-  pageManager: PageManager; 
+  pageManager: PageManagerV2; 
 }>({
   signUpLoginPage: async ({ page }, use) => {
     const signUpLoginPage = new SignUpLoginPage(page);
@@ -54,7 +54,7 @@ export const test = base.extend<{
     await use(cartPage);
   },
   pageManager: async ({ page, request }, use) => {
-    const pageManager = new PageManager(page, request);
+    const pageManager = new PageManagerV2(page, request);
     
     await use(pageManager);
   }
